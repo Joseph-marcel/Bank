@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html
+     xmlns:th="http://www.thymeleaf.org" 
+     xmlns:layout="http://www.ultraq.net.nz" lang="en"
+     layout:decorate="template"
+>
+<head>
+<meta charset="utf-8">
+<title>Customer-Form</title>
+</head>
+<body>
+      <div layout:fragment="content">
+            <div  class="col-md-6 offset-4 mt-5 card bg-light">
+                 <div class="card bg-light">
+                       <div class="card-heading bg-success text-center">Create Customer</div>
+                       <div class="card-body">
+                             <form th:action="@{/saveCustomer}" method="post">
+	                              <div class="group-form">
+	                                    <label for="firstName">First name: </label>
+	                                    <input class="form-control" id="firstName"  type="text" name="firstName"  
+	                                           aria-describedby="firstNameHelp" placeholder="Type first name"  th:value="${customer.firstName}"/>
+	                                           <small id="firstNameHelp" class="form-text text-muted">Thanks for writing first name here</small>
+	                                    <span th:errors="${customer.firstName}"></span>
+	                               </div>
+	                               <div class="group-form">
+	                                    <label for="lastName">Last name: </label>
+	                                    <input class="form-control" id="lastName"   type="text" name="lastName"  
+	                                            aria-describedby="lastNameHelp" placeholder="Type last name"   th:value="${customer.lastName}"/>
+	                                           <small id="lastNameHelp" class="form-text text-muted">Thanks for writing last name here</small>
+	                                    <span th:errors="${customer.lastName}"></span>
+	                               </div>
+	                               <div class="group-form">
+	                                    <label for="email">Email: </label>
+	                                    <input class="form-control" id="email"    type="text" name="email"  th:value="${customer.email}"
+	                                           aria-describedby="emailHelp" placeholder="Type email" />
+	                                            <small id="emailHelp" class="form-text text-muted">Thanks for writing email here</small>
+	                                    <span th:errors="${customer.email}"></span>
+	                              </div>
+	                              <button type="submit" class="btn btn-success mt-2" >OK</button>
+	                       </form>
+	                        <small class="offset-5"><a class="btn btn-danger mt-1" th:href="@{/index}">Go Back</a></small>
+                       </div>
+                 </div>
+            </div>
+      </div>
+</body>
+</html>
