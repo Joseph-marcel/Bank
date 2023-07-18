@@ -30,12 +30,12 @@ public abstract class Operation {
 	@JoinColumn(name="account_code",nullable=false) 
 	private Account account;
 	
-	public Operation() {
+	protected Operation() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Operation(Date dateOperation, double amount, Account account) {
+	protected Operation(Date dateOperation, double amount, Account account) {
 		super();
 		this.dateOperation = dateOperation;
 		this.amount = amount;

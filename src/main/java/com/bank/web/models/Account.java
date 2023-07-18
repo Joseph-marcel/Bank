@@ -40,12 +40,12 @@ public abstract class Account implements Serializable{
 	@OneToMany(mappedBy="account",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Collection<Operation> mouvements;
 	
-	public Account() {
+	protected Account() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Account(String code, Date dateCreation, double balance, Customer customer) {
+	protected Account(String code, Date dateCreation, double balance, Customer customer) {
 		super();
 		this.code = code;
 		this.dateCreation = dateCreation;
