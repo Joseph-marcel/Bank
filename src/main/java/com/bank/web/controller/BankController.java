@@ -72,8 +72,8 @@ public class BankController {
 	}
 	
 	
-	@PostMapping("/newOperation")
-	public String save(Model model,String operationType,String code,double amount,String code1) {
+	@PostMapping("/saveOperation")
+	public String create(Model model,String operationType,String code,double amount,String code1) {
 		System.out.println("iciiiiii");
 		try {
 			if(operationType.equals("Credit")) {

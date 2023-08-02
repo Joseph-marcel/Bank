@@ -57,11 +57,11 @@ public class SecurityConfiguration{
                         .defaultSuccessUrl("/index", true)
                 )
                 .logout(logout -> logout.permitAll())
-        .exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/403"))
-        .userDetailsService(userDetailServiceImpl)
-        .rememberMe(Customizer.withDefaults());
+                .exceptionHandling((exceptionHandling) -> exceptionHandling.accessDeniedPage("/403"))
+                .userDetailsService(userDetailServiceImpl)
+                .rememberMe(Customizer.withDefaults());
         
-        return httpSecurity.build();
+                return httpSecurity.build();
         
         }
     
