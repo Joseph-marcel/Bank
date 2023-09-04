@@ -73,8 +73,8 @@ public class BankController {
 	
 	
 	@PostMapping("/saveOperation")
-	public String create(Model model,String operationType,String code,double amount,String code1) {
-		System.out.println("iciiiiii");
+	public String create(Model model,String operationType,String code,double amount,String code2) {
+		
 		try {
 			if(operationType.equals("Credit")) {
 				iBank.newCredit(code, amount);
@@ -82,8 +82,10 @@ public class BankController {
 				if(operationType.equals("Debit")) {
 					iBank.newDebit(code, amount);
 				}else {
+					
 					if(operationType.equals("Transfer")) {
-						iBank.transfer(code, code1, amount);
+						
+						iBank.transfer(code, code2, amount);
 					}
 				}
 			}

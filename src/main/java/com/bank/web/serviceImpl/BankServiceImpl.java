@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.bank.web.customException.AccountNotFoundException;
 import com.bank.web.customException.CustomerNotFoundException;
+import com.bank.web.customException.InsuffisantBalanceException;
 import com.bank.web.models.Account;
 import com.bank.web.models.Checking;
 import com.bank.web.models.Credit;
@@ -111,7 +112,7 @@ public class BankServiceImpl implements BankService{
 		double overall = 0;
 		if(act instanceof Checking)
 			overall = ((Checking) act).getOverDraft();
-		if((act.getBalance() + overall) < amount) throw new RuntimeException("Insuffisant balance");
+		if((act.getBalance() + overall) < amount) throw new InsuffisantBalanceException("Insuffisant balance");
 		Debit dt = new Debit(new Date(), amount, act);
 		optRepo.save(dt);
 		act.setBalance(act.getBalance() - amount);
@@ -119,11 +120,12 @@ public class BankServiceImpl implements BankService{
 	}
 
 	@Override
-	public void transfer(String code1, String code2, double amount) {
+	public void transfer(String code, String code2, double amount) {
 		// TODO Auto-generated method stub
-		if(code1.equals(code2)) throw new RuntimeException("Impossible transfer from the same account...!!!");
+		
+		if(code.equals(code2)) throw new RuntimeException("Impossible transfer from the same account...!!!");
 			
-		newDebit(code1, amount);
+		newDebit(code, amount);
 		newCredit(code2, amount);
 	}
 
