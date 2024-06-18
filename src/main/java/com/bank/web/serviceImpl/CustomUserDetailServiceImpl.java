@@ -1,8 +1,6 @@
 package com.bank.web.serviceImpl;
 
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,20 +9,21 @@ import com.bank.web.configuration.userDetailsConfig.AppUser;
 import com.bank.web.repositories.AppRoleRepository;
 import com.bank.web.repositories.AppUserRepository;
 import com.bank.web.service.CustomUserDetailService;
+import lombok.AllArgsConstructor;
 
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class CustomUserDetailServiceImpl implements CustomUserDetailService{
 	
 	
-	@Autowired
 	private AppUserRepository   appUserRepo;
 	
-	@Autowired
+	
 	private AppRoleRepository   appRoleRepo;
 	
-	@Autowired
+	
 	private PasswordEncoder     passwordEncoder;
 
 	

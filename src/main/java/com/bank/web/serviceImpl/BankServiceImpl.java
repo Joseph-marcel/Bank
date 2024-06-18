@@ -164,7 +164,7 @@ public class BankServiceImpl implements BankService{
 	@Override
 	public Page<Customer> listCustomers(int page, int size) {
 		// TODO Auto-generated method stub
-		return cstmRepo.listOfCustomers(PageRequest.of(page, size));
+		return null;
 	}
 
 	@Override

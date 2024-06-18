@@ -3,28 +3,19 @@ package com.bank.web.controller;
 
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.data.domain.Page;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.bank.web.configuration.userDetailsConfig.AppUser;
 import com.bank.web.customException.CustomerNotFoundException;
 import com.bank.web.models.Account;
 import com.bank.web.models.Checking;
 import com.bank.web.models.Customer;
 import com.bank.web.models.Operation;
 import com.bank.web.service.BankService;
-import com.bank.web.service.CustomUserDetailService;
-
-import groovy.util.logging.Log;
 import jakarta.validation.Valid;
 
 
@@ -195,7 +186,8 @@ public class BankController {
 	
 	@PostMapping("/saveAccount")
 	public String create(Model model,@Valid Account account) {
-		
+		 
+		System.out.println(account.getDateCreation());
 		
 		return "redirect:/indexAccount";
 	}

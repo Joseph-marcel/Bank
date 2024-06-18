@@ -3,6 +3,7 @@ package com.bank.web.service;
 import com.bank.web.configuration.userDetailsConfig.AppRole;
 import com.bank.web.configuration.userDetailsConfig.AppUser;
 
+
 public interface CustomUserDetailService {
 	
 	AppUser addNewUser(String username,String password,String email,String confirmPassword);

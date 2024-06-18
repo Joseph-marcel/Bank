@@ -6,10 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.bank.web.configuration.userDetailsConfig.AppUser;
 import com.bank.web.service.CustomUserDetailService;
-import lombok.AllArgsConstructor;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService{

@@ -1,14 +1,12 @@
 package com.bank.web.configuration;
 
 
-
 import javax.sql.DataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import com.bank.web.serviceImpl.UserDetailServiceImpl;
@@ -22,16 +20,12 @@ import lombok.AllArgsConstructor;
 public class SecurityConfiguration{
 	
 	
-	
 	private UserDetailServiceImpl userDetailServiceImpl;
 
-    @Bean
-    BCryptPasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
+    
 
 
-//    @Bean
+  //  @Bean
     JdbcUserDetailsManager jdbcUserDetailsManager(DataSource dataSource) {
     	
     	return new JdbcUserDetailsManager(dataSource);
@@ -39,7 +33,7 @@ public class SecurityConfiguration{
     
 
 
-    @Bean
+   @Bean
     SecurityFilterChain web(HttpSecurity httpSecurity) throws Exception{
         httpSecurity
                 .authorizeHttpRequests(
