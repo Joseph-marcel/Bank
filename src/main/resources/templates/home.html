@@ -95,7 +95,8 @@
 								<label>Amount : </label>
 								<input type="number" name="amount" required/>
 						    </div> 
-						    <div class="text-danger" th:if="${error}"   th:text="${error.message}">
+						    <div class="text-danger" th:if="${sms}"  th:text="${sms}">
+						    
 						    </div>
 	                              <input class="btn btn-primary"  type="submit" value="Save"/>
 	                       </form>

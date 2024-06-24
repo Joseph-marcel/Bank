@@ -4,9 +4,6 @@ package com.bank.web.serviceImpl;
 
 import java.util.Collection;
 import java.util.Date;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.bank.web.customException.AccountNotFoundException;
 import com.bank.web.customException.CustomerNotFoundException;
 import com.bank.web.customException.InsuffisantBalanceException;
+import com.bank.web.customException.TransferToSameAccountNotPossibleException;
 import com.bank.web.models.Account;
 import com.bank.web.models.Checking;
 import com.bank.web.models.Credit;
@@ -123,7 +121,7 @@ public class BankServiceImpl implements BankService{
 	public void transfer(String code, String code2, double amount) {
 		// TODO Auto-generated method stub
 		
-		if(code.equals(code2)) throw new RuntimeException("Impossible transfer from the same account...!!!");
+		if(code.equals(code2)) throw new TransferToSameAccountNotPossibleException("Impossible transfer to the same account...!!!");
 			
 		newDebit(code, amount);
 		newCredit(code2, amount);

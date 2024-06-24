@@ -41,9 +41,11 @@ public class BankController {
 	
 	@GetMapping("/consultAccount")
 	public String consult(Model model, String code,
+			String sms,
 			@RequestParam(name="page", defaultValue="0")int page,
 			@RequestParam(name="size", defaultValue="5")int size) {
 		
+		model.addAttribute("sms", sms);
 		model.addAttribute("code", code);
 		try {
 			Account account = iBank.consultAccount(code);
@@ -52,10 +54,11 @@ public class BankController {
 			model.addAttribute("listOperations", pageOperations.getContent());
 			int[] pages = new int[pageOperations.getTotalPages()];
 			model.addAttribute("pages", pages);
-			model.addAttribute("currentPage", page);
+			model.addAttribute("currentPage", page - 1);
 		} catch (Exception e) {
 			// TODO: handle exception
 			model.addAttribute("exception",e);
+			
 		}
 		
 		
@@ -64,26 +67,33 @@ public class BankController {
 	
 	
 	@PostMapping("/saveOperation")
-	public String create(Model model,String operationType,String code,double amount,String code2) {
+	public String create(Model model,
+			             String operationType,
+			             String code,
+			             double amount,
+			             String code2,
+			             String sms) {
 		
 		try {
-			if(operationType.equals("Credit")) {
-				iBank.newCredit(code, amount);
-			}else {
-				if(operationType.equals("Debit")) {
-					iBank.newDebit(code, amount);
+				if(operationType.equals("Credit")) {
+					iBank.newCredit(code, amount);
 				}else {
+					if(operationType.equals("Debit")) {
+						iBank.newDebit(code, amount);
 					
-					if(operationType.equals("Transfer")) {
+					}else {
 						
-						iBank.transfer(code, code2, amount);
+						if(operationType.equals("Transfer")) {
+							
+							iBank.transfer(code, code2, amount);
+						}
 					}
 				}
-			}
 		} catch (Exception e) {
-			model.addAttribute("error",e);
-			
-			return "redirect:/consultAccount?code="+code+"&error="+e.getMessage();
+			   
+			    sms = e.getMessage();
+			    
+				return "redirect:/consultAccount?code="+code+"&sms="+sms;
 		}
 		
 		
