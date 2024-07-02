@@ -1,8 +1,6 @@
 package com.bank.web.serviceImpl;
 
 
-
-import java.util.Collection;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -160,16 +158,12 @@ public class BankServiceImpl implements BankService{
 	}
 
 	@Override
-	public Page<Customer> listCustomers(int page, int size) {
+	public Page<Customer> findAllCustomers(int page, int size) {
 		// TODO Auto-generated method stub
-		return null;
+		return cstmRepo.findAll(PageRequest.of(page, size));
 	}
 
-	@Override
-	public Collection<Customer> findAllCustomers() {
-		// TODO Auto-generated method stub
-		return cstmRepo.findAll();
-	}
+	
 
 	@Override
 	public Account saveAccount(Account account) {
@@ -182,5 +176,7 @@ public class BankServiceImpl implements BankService{
 		// TODO Auto-generated method stub
 		return actRepo.findAll(PageRequest.of(page, size));
 	}
+
+	
 
 }

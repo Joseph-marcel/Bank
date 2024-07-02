@@ -1,7 +1,6 @@
 package com.bank.web.controller;
 
 
-import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -124,10 +123,12 @@ public class BankController {
 	
 	
 	@GetMapping("/formAccount")
-	public String createAccount(Model model) {
+	public String createAccount(Model model,
+			@RequestParam(name="page", defaultValue="0")int page,
+			@RequestParam(name="size", defaultValue="5")int size) {
 		Account account = new Checking();
 		model.addAttribute("account", account);
-		Collection<Customer> customers = iBank.findAllCustomers();
+		Page<Customer> customers = iBank.findAllCustomers(page,size);
 		model.addAttribute("customers", customers);
 		
 		
@@ -137,10 +138,12 @@ public class BankController {
 	@GetMapping("/indexCustomers")
 	public String indexCustomers(Model model,
 			@RequestParam(name="page", defaultValue="0")int page, 
-			@RequestParam(name="size", defaultValue="8") int size){
+			@RequestParam(name="size", defaultValue="8") int size,
+			String message){
 		    
+		         model.addAttribute("message", message);
 		try {
-			Page<Customer> customers = iBank.listCustomers(page, size);
+			Page<Customer> customers = iBank.findAllCustomers(page, size);
 			model.addAttribute("customers", customers.getContent());
 			int[] pages = new int[customers.getTotalPages()];
 			model.addAttribute("pages", pages);
@@ -159,17 +162,14 @@ public class BankController {
 	
 	@PostMapping("/saveCustomer")
 	public String save(Model model,@Valid Customer customer, BindingResult bindingResult,
-			@RequestParam(defaultValue="0")int page,
-			@RequestParam(defaultValue="")String keyword) {
+			String message) {
 		if(bindingResult.hasErrors()) return "formCustomer";
 
 		iBank.saveCustomer(customer);
-		String sms = "Successfull......!!!!";
-		model.addAttribute("message", sms);
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("page", page);
+	    message = "Successfull......!!!!";
 		
-		return "redirect:/indexCustomers?page="+page+"&keyword="+keyword;
+		
+		return "redirect:/indexCustomers?message="+message;
 	}
 	
 	

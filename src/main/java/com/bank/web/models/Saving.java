@@ -10,6 +10,10 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("AS") 
 public class Saving extends Account{
     
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double rate;
 
 	public Saving() {

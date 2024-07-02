@@ -26,6 +26,10 @@ import jakarta.persistence.TemporalType;
 @DiscriminatorColumn(name="ACCOUNT_TYPE", discriminatorType = DiscriminatorType.STRING,length=2) 
 public abstract class Account implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String code;
 	@Temporal(TemporalType.DATE)

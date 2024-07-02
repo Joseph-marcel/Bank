@@ -9,6 +9,10 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("AC") 
 public class Checking extends Account{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private double overDraft;
 
 	public Checking() {
